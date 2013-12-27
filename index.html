@@ -1,0 +1,127 @@
+<!doctype html>
+<html ng-app>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script>
+      function Controller($scope) {
+        $scope.counter = 0;
+        $scope.weightPounds = function() {
+          $scope.weight_kgs = (($scope.weight_lbs * 16) + $scope.weight_ounces) * 0.0283495;
+        };
+        $scope.weightOunces = function() {
+          $scope.weight_kgs = (($scope.weight_lbs * 16) + $scope.weight_ounces) * 0.0283495;
+        };
+        $scope.weightKgs = function() {
+          var ouncesTotal = $scope.weight_kgs * 35.274;
+          var ouncesPart = ouncesTotal % 16;
+          var poundsPart = (ouncesTotal - ouncesPart) / 16;
+          $scope.weight_lbs = Math.round(poundsPart);
+          $scope.weight_ounces = Math.round(ouncesPart);
+        };
+        $scope.calPerOunce = function() {
+          var caloriesTotal = $scope.kcal_per_day * $scope.weight_kgs;
+          $scope.oz_day = caloriesTotal / $scope.cal_per_ounce;
+          $scope.ml_day = Math.round($scope.oz_day / 0.033814);
+          $scope.oz_feed = $scope.oz_day / $scope.feeds;
+          $scope.ml_feed = Math.round($scope.ml_day / $scope.feeds);
+        };
+        $scope.mlsToOunces = function() {
+          //$scope.counter++;
+          $scope.oz_day = Math.round($scope.ml_day * 0.033814);
+          var caloriesTotal = $scope.oz_day * $scope.cal_per_ounce;
+          $scope.kcal_per_day = caloriesTotal / $scope.weight_kgs;
+          $scope.oz_feed = $scope.oz_day / $scope.feeds;
+          $scope.ml_feed = Math.round($scope.ml_day / $scope.feeds);
+        };
+        $scope.ouncesToMls = function() {
+          //$scope.counter++;
+          $scope.ml_day = Math.round($scope.oz_day / 0.033814);
+          var caloriesTotal = $scope.oz_day * $scope.cal_per_ounce;
+          $scope.kcal_per_day = caloriesTotal / $scope.weight_kgs;
+          $scope.oz_feed = $scope.oz_day / $scope.feeds;
+          $scope.ml_feed = Math.round($scope.ml_day / $scope.feeds);
+        };
+        $scope.kcal = function() {
+          var caloriesTotal = $scope.kcal_per_day * $scope.weight_kgs;
+          $scope.oz_day = caloriesTotal / $scope.cal_per_ounce;
+          $scope.ml_day = Math.round($scope.oz_day / 0.033814);
+          $scope.oz_feed = $scope.oz_day / $scope.feeds;
+          $scope.ml_feed = Math.round($scope.ml_day / $scope.feeds);
+        };
+        $scope.mlsToOuncesFeed = function() {
+          //$scope.counter++;
+          $scope.oz_feed = $scope.ml_feed * 0.033814;
+          $scope.oz_day = $scope.oz_feed * $scope.feeds;
+          $scope.ml_day = $scope.ml_feed * $scope.feeds;
+          var caloriesTotal = $scope.oz_day * $scope.cal_per_ounce;
+          $scope.kcal_per_day = caloriesTotal / $scope.weight_kgs;
+        };
+        $scope.ouncesToMlsFeed = function() {
+          //$scope.counter++;
+          $scope.ml_feed = Math.round($scope.oz_feed / 0.033814);
+          $scope.oz_day = $scope.oz_feed * $scope.feeds;
+          $scope.ml_day = $scope.ml_feed * $scope.feeds;
+          var caloriesTotal = $scope.oz_day * $scope.cal_per_ounce;
+          $scope.kcal_per_day = caloriesTotal / $scope.weight_kgs;
+        };
+        $scope.feedsPerDay = function() {
+          $scope.oz_feed = $scope.oz_day / $scope.feeds;
+          $scope.ml_feed = Math.round($scope.ml_day / $scope.feeds);
+        };
+      }
+    </script>
+  </head>
+  <body>
+    <div ng-controller="Controller">
+
+      <label>Weight:</label>
+      <br />
+      <label>Lbs:</label>
+      <input type="number" pattern="\d*"  ng-model="weight_lbs" ng-change="weightPounds()" placeholder="lbs">
+      <label>Ounces:</label>
+      <input type="number" pattern="\d*"  ng-model="weight_ounces" ng-change="weightOunces()" placeholder="oz">
+      <br>
+      <label>Kg:</label>
+      <input type="number" pattern="\d*"  ng-model="weight_kgs" ng-change="weightKgs()" placeholder="Kgs">
+      <br>
+
+      <br />
+      <label>Kcal per Kg per day:</label>
+      <input type="number" pattern="\d*"  ng-model="kcal_per_day" ng-change="kcal()" placeholder="kcal">
+      <br />
+      <br />
+
+      <label>Calories per Ounce:</label>
+      <input type="number" pattern="\d*"  ng-model="cal_per_ounce" ng-change="calPerOunce()" placeholder="cal">
+      <br />
+      <br />
+
+      <br />
+      <label>Number of feeds per day:</label>
+      <input type="number" pattern="\d*"  ng-model="feeds" ng-change="feedsPerDay()" placeholder="Feeds">
+      <br />
+      <br />
+
+      <br />
+      <label>ml per day:</label>
+      <input type="number" pattern="\d*"  ng-model="ml_day" ng-change="mlsToOunces()" placeholder="ml">
+      <br>
+      <label>oz per day:</label>
+      <input ng-model="oz_day" ng-change="ouncesToMls()" type="number" pattern="\d*" placeholder="oz">
+      <br>
+      <br>
+
+
+      <label>ml per feed:</label>
+      <input type="number" pattern="\d*"  ng-model="ml_feed" ng-change="mlsToOuncesFeed()" placeholder="ml">
+      <br>
+      <label>oz per feed:</label>
+      <input ng-model="oz_feed" ng-change="ouncesToMlsFeed()" type="number" pattern="\d*" placeholder="oz">
+      <br>
+
+
+    </div>
+  </body>
+</html>
