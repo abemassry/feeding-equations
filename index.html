@@ -78,46 +78,56 @@
 
       <label>Weight:</label>
       <br />
+      <br />
       <label>Lbs:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="weight_lbs" ng-change="weightPounds()" placeholder="lbs">
       <label>Ounces:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="weight_ounces" ng-change="weightOunces()" placeholder="oz">
-      <br>
       <label>Kg:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="weight_kgs" ng-change="weightKgs()" placeholder="Kgs">
       <br>
 
       <br />
       <label>Kcal per Kg per day:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="kcal_per_day" ng-change="kcal()" placeholder="kcal">
       <br />
       <br />
 
       <label>Calories per Ounce:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="cal_per_ounce" ng-change="calPerOunce()" placeholder="cal">
       <br />
       <br />
 
       <br />
       <label>Number of feeds per day:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="feeds" ng-change="feedsPerDay()" placeholder="Feeds">
       <br />
       <br />
 
       <br />
       <label>ml per day:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="ml_day" ng-change="mlsToOunces()" placeholder="ml">
       <br>
       <label>oz per day:</label>
+      <br />
       <input ng-model="oz_day" ng-change="ouncesToMls()" type="number" pattern="\d*" placeholder="oz">
       <br>
       <br>
 
 
       <label>ml per feed:</label>
+      <br />
       <input type="number" pattern="\d*"  ng-model="ml_feed" ng-change="mlsToOuncesFeed()" placeholder="ml">
       <br>
       <label>oz per feed:</label>
+      <br />
       <input ng-model="oz_feed" ng-change="ouncesToMlsFeed()" type="number" pattern="\d*" placeholder="oz">
       <br>
 
